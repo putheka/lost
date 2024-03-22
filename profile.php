@@ -1,30 +1,3 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/html">
-<head>
-
-    <!--Import Google Icon Font-->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!--Import materialize.css-->
-    <link type="text/css" rel="stylesheet" href="css/materialize.css" media="screen,projection"/>
-    <!--Let browser know website is optimized for mobile-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="stylesheet" href="css/main.css">
-
-    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
-    <script type="text/javascript" src="js/materialize.min.js"></script>
-    <script type="text/javascript" src="js/mainx.js"></script>
-    <style>
-        .postcard {
-            margin-left: 20px;
-            margin-right: 20px;
-            border-radius: 20px;
-
-        }
-
-
-    </style>
-</head>
-<body class="   grey darken-2">
 <?php
 require("config.php");
 require("functions.php");
@@ -39,70 +12,67 @@ $row = mysqli_fetch_array(mysqli_query($conn, $sql));
 $post = $row['posts'];
 ?>
 
-<nav class="  blue-grey darken-3 z-depth-2" style="text-transform:">
-    <div class="nav-wrapper  ">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="css/profile.css"> <!-- Your custom CSS file -->
+</head>
+<body>
+    <nav>
+        <div class="nav-wrapper blue-grey darken-3">
+            <a href="#" class="brand-logo center">Lost And Found</a>
+            <ul id="nav-mobile" class="right">
+                <?php if (is_admin()) : ?>
+                    <li><a href="admin.php" class="btn white-text">Admin Panel</a></li>
+                <?php endif; ?>
+                <li><a href="index.php" class="btn white-text">Home</a></li>
+                <li><a href="logout.php" class="btn white-text">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
 
-        <a href="index.php" class="brand-logo " style="margin-left: 20px;text-transform: uppercase;">Lost And Found</a>
-        <ul class="right hide-on-med-and-down">
-
-            <!--<li><a href="about.php">About</a></li>-->
-            <?php if (is_admin()) {
-                echo " <li><a href=\"admin.php\" class=\" white-text btn \">ADMIN PANEL</a></li>";
-            } ?>
-            <li><a href="profile.php" class=" btn  white-text ">PROFILE</a></li>
-            <li><a href="logut.php" class="btn  white-text ">LOGOUT</a></li>
-
-        </ul>
-
-    </div>
-</nav>
-<style>
-    .row {
-        margin-bottom: 0px;
-    }
-    .xx{
-        overflow-y:scroll;
-        max-height:480px;
-
-        display:block;
-    }
-</style>
-<div class="container">
-    <div class="row profilev   ">
-
-        <div class="col s12 push-s1  z-depth-4 card-panel blue-grey darken-3 white-text" style="border-radius: 5px;">
-            <div class="container">
-                <div class="row">
-                    <br>
-                    <?php
-                    echo "<div class=\"col s2\">$name</div>
-            <div class=\"col s5\">EMAIL  :$user</div>
-            <div class='col s2'>Total post :$post</div>
-            <div class=\"col s2 push-s1\" style='margin-right: 5px'><a href='edituser.php' class='btn'>edit </a></div>";
-                    ?>
+    <div class="container ">
+        <div class="row">
+            <div class="col s12 ">
+                <div class="card blue-grey darken-3 z-depth-3 broder-white">
+                    <div class="card-content white-text">
+                        <span class="card-title">User Profile</span>
+                        <div class="divider"></div>
+                        <div class="profile-info">
+                            <p>Name: <?php echo $name; ?></p>
+                            <p>Email: <?php echo $user; ?></p>
+                            <p>Total Posts: <?php echo $post; ?></p>
+                            <a href="edituser.php" class="waves-effect waves-light btn">Edit Profile</a>
+                        </div>
+                    </div>
                 </div>
-            </div
-
+            </div>
         </div>
 
-    </div>
-</div>
-<div class="xx">
-<div class="white-text blue-grey darken-1  z-depth-1" style=" ">
-    <table class="centered  responsive-table  ">
-        <div class="center-align flow-text">POST's BY <?php echo  $name?></div>
-        <thead>
-        <tr style="text-transform: uppercase">
-            <th>id</th>
-            <th>type</th>
-            <th>Catageory</th>
-            <th>post date</th>
-            <th>know more</th>
-
-            <th>DRAFT</th>
-            <th>Search</th>
-        </tr>
-        </thead>
+        <div class="row">
+            <div class="col s12">
+                <div class="card blue-grey darken-3 z-depth-3">
+                    <div class="card-content white-text">
+                        <span class="card-title">Posts</span>
+                        <div class="divider"></div>
+                        <table class="white-text highlight responsive-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Type</th>
+                                    <th>Category</th>
+                                    <th>Post Date</th>
+                                    <th>Details</th>
+                                    <th>Draft</th>
+                                    <th>Search</th>
+                                </tr>
+                            </thead>
+                            <tbody>
 
         <tbody style="text-transform: capitalize;" >
         <?php

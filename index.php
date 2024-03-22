@@ -1,20 +1,19 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/html">
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lost And Found</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
-    <!--Import Google Icon Font-->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!--Import materialize.css-->
-    <link type="text/css" rel="stylesheet" href="css/materialize.css" media="screen,projection"/>
-    <!--Let browser know website is optimized for mobile-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="stylesheet" href="css/main.css">
-
-    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
-    <script type="text/javascript" src="js/materialize.min.js"></script>
-    <script type="text/javascript" src="js/main.js"></script>
+    <!-- Custom CSS -->
+    <style>
+        /* Add your custom CSS styles here */
+    </style>
 </head>
-<body class="  grey darken-1">
+<body class="grey darken-1">
 <?php
 require("config.php");
 require("functions.php");
@@ -24,66 +23,58 @@ if (!(isset($_SESSION['login_user']))) {
 }
 $user = $_SESSION['login_user'];
 ?>
-<!-- User Profile -->
 
-<nav class="  blue-grey darken-3 z-depth-2" style="text-transform:">
-    <div class="nav-wrapper  ">
-
-        <a href="#" class="brand-logo " style="margin-left: 20px;text-transform: uppercase;">Lost And Found</a>
-        <ul class="right hide-on-med-and-down">
-
-            <!--<li><a href="about.php">About</a></li>-->
+<!-- Navigation Bar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Lost And Found</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
             <?php if (is_admin()) {
-                echo " <li><a href=\"admin.php\" class=\" white-text btn \">ADMIN PANEL</a></li>";
+                echo "<li class=\"nav-item\"><a class=\"nav-link\" href=\"admin.php\">ADMIN PANEL</a></li>";
             } ?>
-            <li><a href="profile.php" class=" btn  white-text ">PROFILE</a></li>
-            <li><a href="logut.php" class="btn  white-text ">LOGOUT</a></li>
-
+            <li class="nav-item"><a class="nav-link" href="lost.php">Lost Post</a></li>
+            <li class="nav-item"><a class="nav-link" href="found.php">Found Post</a></li>
+            <li class="nav-item"><a class="nav-link" href="profile.php">PROFILE</a></li>
+            <li class="nav-item"><a class="nav-link" href="logout.php">LOGOUT</a></li>
         </ul>
-
     </div>
 </nav>
-<br>
-<br>
-<div class="container" style="margin-left: 380px;">
+
+<!-- Main Content -->
+<div class="container" style="margin-top: 20px;">
     <div class="row">
-        <div class="col s6">
-            <div class="">
-                <div class=" ">
-                    <div class="card-panel blue-grey darken-4 z-depth-5">
-          <span class="white-text flow-text">ADD DETAIL ABOUT LOST ITEM
-          </span>
-                        <br>
-                        <br>
-                        <a href="lost.php" class="btn">ADD POST</a>
-                    </div>
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-body bg-dark text-white">
+                    <h5 class="card-title">ADD DETAIL ABOUT LOST ITEM</h5>
+                    <a href="lost.php" class="btn btn-primary">ADD POST</a>
                 </div>
             </div>
         </div>
-
-
     </div>
 </div>
 
-<div class="container " style="margin-left: 380px;">
+<div class="container" style="margin-top: 20px;">
     <div class="row">
-        <div class="col s6">
-            <div class="">
-                <div class="">
-                    <div class="card-panel blue-grey darken-4 z-depth-5">
-          <span class="white-text flow-text">ADD DETAIL ABOUT FOUND ITEM
-          </span>
-                        <br>
-                        <br>
-                        <a href="found.php" class="btn">ADD POST</a>
-                    </div>
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-body bg-dark text-white">
+                    <h5 class="card-title">ADD DETAIL ABOUT FOUND ITEM</h5>
+                    <a href="found.php" class="btn btn-primary">ADD POST</a>
                 </div>
             </div>
         </div>
-
-
     </div>
 </div>
+
+<!-- Bootstrap JS and jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 </body>
-
 </html>

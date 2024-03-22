@@ -97,7 +97,7 @@ if($_SERVER['REQUEST_METHOD']=="POST")
                 <div class="col s6">
                     <div class="input-field col s10">
                         <input id="icon_prefix" type="text" required class="validate" name="cat" minlength="5"
-                               maxlength="6">
+                               maxlength="10">
                         <label for="icon_prefix " class="white-text">Catageory</label>
                     </div>
 

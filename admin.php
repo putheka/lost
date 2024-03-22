@@ -51,7 +51,7 @@
 </style>
 <div class="row" style="margin: 0px;">
     <div class="col s12 m12 l3">
-        <div class="card blue darken-2">
+        <div class="card blue-grey darken-2">
             <div class="card-content white-text">
                 <span class="card-title">Total User's</span>
                 <?php echo"<p>$tu</p>"?>
@@ -60,7 +60,7 @@
         </div>
     </div>
     <div class="col s12 m12 l3">
-        <div class="card blue darken-2">
+        <div class="card blue-grey darken-2">
             <div class="card-content white-text">
                 <span class="card-title">  Lost post's</span>
                 <?php echo"<p>$tl</p>"?>
@@ -69,7 +69,7 @@
         </div>
     </div>
     <div class="col s12 m12 l3">
-        <div class="card blue darken-2">
+        <div class="card blue-grey darken-2">
             <div class="card-content white-text">
                 <span class="card-title"> Found post's</span>
                 <?php echo"<p>$tf</p>"?>
@@ -79,7 +79,7 @@
     </div>
 
     <div class="col s12 m12 l3">
-        <div class="card blue darken-2">
+        <div class="card blue-grey darken-2">
             <div class="card-content white-text">
                 <span class="card-title">Drafted posts</span>
                 <?php echo"<p>$td</p>"?>

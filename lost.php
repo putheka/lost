@@ -1,145 +1,123 @@
-<html xmlns="http://www.w3.org/1999/html">
-<head>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 
+<head>
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!--Import materialize.css-->
-    <link type="text/css" rel="stylesheet" href="css/materialize.css" media="screen,projection"/>
+    <!--Import Bootstrap CSS-->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <!--Let browser know website is optimized for mobile-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="stylesheet" href="css/postreport.css">
-    <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,700,900|Roboto+Condensed:400,300,700'
-          rel='stylesheet' type='text/css'>
-
-    <link rel="stylesheet" href="dist/css/dropify.min.css">
-    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
-    <script type="text/javascript" src="js/materialize.min.js"></script>
-
-    <script type="text/javascript" src="js/postreport.js"></script>
-    <script src="dist/js/dropify.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-<body class="blue grey darken-2">
-<?php
-require ("config.php");
-require ("session.php");
-require ("functions.php");
-?>
-<nav class="  blue-grey darken-3 z-depth-2" style="text-transform:">
-    <div class="nav-wrapper  ">
 
-        <a href="index.php" class="brand-logo " style="margin-left: 20px;text-transform: uppercase;">Lost And Found</a>
-        <ul class="right hide-on-med-and-down">
+<body>
+    <?php
+    require("config.php");
+    require("functions.php");
+    require("session.php");
+    ?>
 
-            <!--<li><a href="about.php">About</a></li>-->
-            <?php if (is_admin()) {
-                echo " <li><a href=\"admin.php\" class=\" white-text btn \">ADMIN PANEL</a></li>";
-            } ?>
-            <li><a href="profile.php" class=" btn  white-text ">PROFILE</a></li>
-            <li><a href="logut.php" class="btn  white-text ">LOGOUT</a></li>
-
-        </ul>
-
-    </div>
-</nav>
-<div class="container white-text  blue-grey   darken-3 form_main z-depth-5">
-    <div class="row">
-        <div class="col s6">
-            <h5 style="text-transform:uppercase">Enter Deatils about lost item </h5>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Lost And Found</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <?php if (is_admin()) {
+                    echo "<li class=\"nav-item\"><a class=\"nav-link\" href=\"admin.php\">ADMIN PANEL</a></li>";
+                } ?>
+                <li class="nav-item"><a class="nav-link" href="profile.php">PROFILE</a></li>
+                <li class="nav-item"><a class="nav-link" href="logout.php">LOGOUT</a></li>
+            </ul>
         </div>
-        <form class="" action="lostpost.php" method="post" enctype='multipart/form-data'>
-            <div class="col s8">
-                <div class="col s6">
-                    <div class="input-field col s10 white-text">
-                        <i class="material-icons prefix " style="margin-top: 10px;" >format_list_bulleted
-                        </i>
-                        <select name="cata" required>
-                            <option value="" disabled selected class="" value="0">Select Category</option>
-                            <?php
-                            gen_cat_list();
-                            ?>
-                        </select>
-                    </div>
-                </div>
+    </nav>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header bg-dark text-white">Enter Details About Lost Item</div>
+                    <div class="card-body">
+                        <form action="lostpost.php" method="post" enctype="multipart/form-data">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="cata">Category:</label>
+                                    <select class="form-control" id="cata" name="cata" required>
+                                        <option value="" disabled selected>Select Category</option>
+                                        <?php gen_cat_list(); ?>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="pincode">Pincode:</label>
+                                    <input type="number" class="form-control" id="pincode" name="pincode" required minlength="5" maxlength="6">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="discription">Description:</label>
+                                <textarea class="form-control" id="discription" name="discription" required minlength="10" maxlength="80"></textarea>
+                            </div>
 
-                <div class="col s6">
-                    <div class="input-field col s10">
-                        <i class="material-icons prefix">location_on</i>
-                        <input id="icon_prefix" type="number" required class="validate" name="pincode" minlength="5" maxlength="6">
-                        <label for="icon_prefix " class="white-text">Pincode</label>
-                    </div>
+                            <div class="form-group">
+                                <label for="city">City/State:</label>
+                                <input type="text" class="form-control" id="city" name="city" required minlength="4">
+                            </div>
+                            <div class="form-group">
+                                <label for="street">Street/Locality:</label>
+                                <input type="text" class="form-control" id="street" name="street" required minlength="4">
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="phone">Phone:</label>
+                                    <input type="number" class="form-control" id="phone" name="phone" required maxlength="10" minlength="10">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="date">Date:</label>
+                                    <input type="date" class="form-control" id="date" name="date" required>
+                                </div>
+                            </div>
 
-                </div>
-                <div class="col s6">
-                    <div class="input-field col s10">
-                        <i class="material-icons prefix">sort</i>
-                        <textarea id="icon_prefix2" required class="materialize-textarea" name="discription" minlength="10" maxlength="80"></textarea>
-                        <label for="icon_prefix2 " class="white-text">Description</label>
-                    </div>
-                </div>
-
-                <div class="col s6">
-                    <div class="input-field col s10">
-                        <i class="material-icons prefix">mail_outline</i>
-                        <input id="city" type="text" required class="validate" name="city" minlength="4">
-                        <label for="city" class="white-text">City/State</label>
-                    </div>
-
-                </div>
-
-
-                <div class="col s6">
-                    <div class="input-field col s10">
-                        <i class="material-icons prefix">location_searching</i>
-                        <input id="locality" type="text" required class="validate" name="street" minlength="4">
-                        <label for="locality" class="white-text">Sreet/Locality</label>
-                    </div>
-
-                </div>
-
-
-
-                <div class="col s6">
-                    <div class="input-field col s10">
-                        <i class="material-icons prefix">phone</i>
-                        <input id="phone" type="number" required class="validate" name="phone" maxlength="10" minlength="10">
-                        <label for="phone" class="white-text">Phone</label>
-                    </div>
-
-                </div>
+                            <label for="file-input" style="display: block; width: 100%; margin-bottom: 10px;">
+                                <div class="preview-container" style="width: 100%; height: 300px; overflow: hidden;">
+                                    <img id="preview-image" class="img-fluid img-thumbnail" src="https://img.freepik.com/free-photo/white-cloud-with-download-icon-cloud-computing-technology-sign-symbol-3d-rendering_56104-1285.jpg?w=1380&t=st=1711097775~exp=1711098375~hmac=eb16db4733390ac5399d61cd49c9d4b0fb63b833b1e0d6ef68744793f4f1df0e" alt="User Preview" style="width: 100%; height: 100%; object-fit: cover;">
+                                    <div class="upload-icon">
+                                        <i class="fas fa-upload"></i>
+                                    </div>
+                                </div>
+                                <input type="file" class="form-control d-none" id="file-input" name="limage" required onchange="previewImage(event)" style="width: 100%;">
+                            </label>
 
 
 
-                <div class="col s6">
-                    <div class="input-field col s10">
-                        <i class="material-icons prefix">av_timer</i>
-                        <input  class="materialize-textarea" required type="date" name="date"></input>
+                            <script>
+                                function previewImage(event) {
+                                    const fileInput = event.target;
+                                    const previewImage = document.getElementById('preview-image');
 
-                    </div>
-                </div>
+                                    const file = fileInput.files[0];
+                                    const reader = new FileReader();
+
+                                    reader.onload = function(e) {
+                                        previewImage.src = e.target.result;
+                                    };
+
+                                    reader.readAsDataURL(file);
+                                }
+                            </script>
 
 
-            </div>
-
-            <div class="col s4 imagesubmit">
-                <div class="col 12">
-
-                        <input type="file" name="limage" id="input-file-now-custom-1" class="dropify" data-height="250"
-                               data-max-file-size="1M" / >
+                            <button type="submit" class="btn btn-primary btn-block">POST</button>
+                        </form>
                     </div>
                 </div>
             </div>
-            <br>
-            <div class="col s6 " style="margin-left: 20px; margin-bottom: 10px ;border-radius: 100px;">
-                <button class="btn btn-large blue darken-2 z-depth-3 waves-effect waves-light" type="submit"
-                        name="action">POST
-                    <i class="material-icons right">send</i>
-                </button>
-
-            </div>
+        </div>
     </div>
-    </form>
-</div>
-</div>
 
+
+    <!--Import Bootstrap JS-->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
 </html>
