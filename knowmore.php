@@ -70,7 +70,7 @@ if (isset($_GET['id'])) {
 
     <li><a href="logut.php" class="blue darken-1 white-text indigo darken-4">Logout</a></li>
 </ul>
-<nav class="  blue-grey darken-3 z-depth-2" style="text-transform:">
+<nav class="  blue-grey darken-3 z-depth-2" >
     <div class="nav-wrapper  ">
 
         <a href="index.php" class="brand-logo " style="margin-left: 20px;text-transform: uppercase;">Lost And Found</a>

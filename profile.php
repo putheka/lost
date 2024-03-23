@@ -14,6 +14,7 @@ $post = $row['posts'];
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,80 +22,108 @@ $post = $row['posts'];
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="css/profile.css"> <!-- Your custom CSS file -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
+
 <body>
-    <nav>
-        <div class="nav-wrapper blue-grey darken-3">
-            <a href="#" class="brand-logo center">Lost And Found</a>
-            <ul id="nav-mobile" class="right">
-                <?php if (is_admin()) : ?>
-                    <li><a href="admin.php" class="btn white-text">Admin Panel</a></li>
-                <?php endif; ?>
-                <li><a href="index.php" class="btn white-text">Home</a></li>
-                <li><a href="logout.php" class="btn white-text">Logout</a></li>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Lost And Found</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <?php if (is_admin()) {
+                    echo "<li class=\"nav-item\"><a class=\"nav-link\" href=\"admin.php\">ADMIN PANEL</a></li>";
+                } ?>
+                <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="logut.php">LOGOUT</a></li>
             </ul>
         </div>
     </nav>
 
-    <div class="container ">
+    <div class="container mt-5">
         <div class="row">
-            <div class="col s12 ">
-                <div class="card blue-grey darken-3 z-depth-3 broder-white">
-                    <div class="card-content white-text">
-                        <span class="card-title">User Profile</span>
-                        <div class="divider"></div>
-                        <div class="profile-info">
+            <!-- Profile Information Column -->
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        User Profile
+                    </div>
+                    <div class="card-body">
+                        <div class="text-center mb-4">
+                            <?php
+                            // Retrieve profile image path from the database
+                            $profileImageQuery = "SELECT profile_image FROM user WHERE email='$user'";
+                            $profileImageResult = mysqli_query($conn, $profileImageQuery);
+                            if ($profileImageResult && mysqli_num_rows($profileImageResult) > 0) {
+                                $row = mysqli_fetch_assoc($profileImageResult);
+                                $profileImagePath = $row['profile_image'];
+
+                                // Display the profile image
+                                echo '<img src="' . $profileImagePath . '" alt="Profile Image" class="img-fluid rounded-circle" style="width: 150px; height: 150px;">';
+                            } else {
+                                // Display a default profile image if no image is found
+                                echo '<img src="default-profile-image.png" alt="Profile Image" class="img-fluid rounded-circle" style="width: 150px; height: 150px;">';
+                            }
+                            ?>
+                        </div>
+                        <div class="text-center">
                             <p>Name: <?php echo $name; ?></p>
                             <p>Email: <?php echo $user; ?></p>
                             <p>Total Posts: <?php echo $post; ?></p>
-                            <a href="edituser.php" class="waves-effect waves-light btn">Edit Profile</a>
+                            <a href="edituser.php" class="btn btn-warning">Edit Profile</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Posts Table Column -->
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        Posts
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-white">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Type</th>
+                                        <th>Category</th>
+                                        <th>Post Date</th>
+                                        <th>Details</th>
+                                        <th>Draft</th>
+                                        <th>Search</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    // Fetch and display user's posts
+                                    $sql = "SELECT `id` FROM `lthings` WHERE `uemail`='$user'";
+                                    $retval = mysqli_query($conn, $sql);
+                                    while ($row = mysqli_fetch_array($retval, MYSQLI_ASSOC)) {
+                                        $id = $row['id'];
+                                        get_post($id, 'lost');
+                                    }
+                                    $sql = "SELECT `id` FROM `fthings` WHERE `uemail`='$user'";
+                                    $retval = mysqli_query($conn, $sql);
+                                    while ($row = mysqli_fetch_array($retval, MYSQLI_ASSOC)) {
+                                        $id = $row['id'];
+                                        get_post($id, 'found');
+                                    }
+                                    ?>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="row">
-            <div class="col s12">
-                <div class="card blue-grey darken-3 z-depth-3">
-                    <div class="card-content white-text">
-                        <span class="card-title">Posts</span>
-                        <div class="divider"></div>
-                        <table class="white-text highlight responsive-table">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Type</th>
-                                    <th>Category</th>
-                                    <th>Post Date</th>
-                                    <th>Details</th>
-                                    <th>Draft</th>
-                                    <th>Search</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-
-        <tbody style="text-transform: capitalize;" >
-        <?php
-        $sql = "SELECT `id` FROM `lthings` WHERE `uemail`='$user'";
-        $retval = mysqli_query($conn, $sql);
-        while ($row = mysqli_fetch_array($retval, MYSQLI_ASSOC)) {
-            $id=$row['id'];
-            get_post($id, 'lost');
-        }
-        $sql = "SELECT `id` FROM `fthings` WHERE `uemail`='$user'";
-        $retval = mysqli_query($conn, $sql);
-        while ($row = mysqli_fetch_array($retval, MYSQLI_ASSOC)) {
-            $id=$row['id'];
-            get_post($id, 'found');
-        }
-        ?>
-        </tbody>
-    </table>
-
-
-</div>
-</div>
 
 </body>
 

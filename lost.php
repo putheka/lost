@@ -27,8 +27,9 @@
                 <?php if (is_admin()) {
                     echo "<li class=\"nav-item\"><a class=\"nav-link\" href=\"admin.php\">ADMIN PANEL</a></li>";
                 } ?>
+                <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
                 <li class="nav-item"><a class="nav-link" href="profile.php">PROFILE</a></li>
-                <li class="nav-item"><a class="nav-link" href="logout.php">LOGOUT</a></li>
+                <li class="nav-item"><a class="nav-link" href="logut.php">LOGOUT</a></li>
             </ul>
         </div>
     </nav>

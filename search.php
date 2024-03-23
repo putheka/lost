@@ -44,7 +44,7 @@ if($_SERVER['REQUEST_METHOD']=="GET"){
 }
 ?>
 
-<nav class="  blue-grey darken-3 z-depth-2" style="text-transform:">
+<nav class="  blue-grey darken-3 z-depth-2" >
     <div class="nav-wrapper  ">
 
         <a href="index.php" class="brand-logo " style="margin-left: 20px;text-transform: uppercase;">Lost And Found</a>
@@ -78,8 +78,8 @@ if($type=="found")
     $xtype="lost";
 ?>
 <div class="xx" style="margin: 30px">
-<div class="white-text blue-grey darken-1  z-depth-1" style=";">
-    <table class="centered  responsive-table  " style="">
+<div class="white-text blue-grey darken-1  z-depth-1" >
+    <table class="centered  responsive-table  " >
         <?php
         echo "<div class=\"center-align flow-text\">Result matching  with $xtype items</div>";
         ?>
@@ -94,7 +94,7 @@ if($type=="found")
         </tr>
         </thead>
 
-        <tbody style="">
+        <tbody>
         <?php
 
         if($type=='found') {

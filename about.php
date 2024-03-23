@@ -36,7 +36,7 @@ require("session.php");
 </ul>
 
 
-<nav class="  blue-grey darken-2 z-depth-2" style="text-transform:">
+<nav class="blue-grey darken-2 z-depth-2">
     <div class="nav-wrapper  ">
         <a href="index.php" class="brand-logo logo">
             <img src="image/logotext.png" class="responsive-img inline"></a>
@@ -45,8 +45,8 @@ require("session.php");
             <li><a href="search.php"><i class="material-icons left">search</i>Search Posts</a></li>
 
             <!-- Dropdown Trigger -->
-            <li><a class="dropdown-button sim" href="#!" data-activates="dropdown1"><img src="image/user.JPG"
-                                                                                         class="circle responsive-img loggeduser center-align "/></a>
+            <li><a class="dropdown-button sim" href="#!" data-activates="dropdown1">
+                <img src="image/user.JPG"class="circle responsive-img loggeduser center-align "/></a>
             </li>
         </ul>
 

@@ -1,37 +1,57 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: nishan
- * Date: 03-10-2017
- * Time: 09:01 PM
- */
-require ("config.php");
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+require("config.php");
 
-    $email= mysqli_real_escape_string($conn, $_POST['email']);
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $email = mysqli_real_escape_string($conn, $_POST['email']);
     $fname = mysqli_real_escape_string($conn, $_POST['fname']);
     $lname = mysqli_real_escape_string($conn, $_POST['lname']);
-   // $pincode =$_POST['pincode'];
     $password = md5(mysqli_real_escape_string($conn, $_POST['password']));
 
-    $sql = "SELECT email FROM user WHERE email = '$email'";
-    $retval=mysqli_query($conn,$sql);
-    $row = mysqli_fetch_array($retval,MYSQLI_ASSOC);
-    $count = mysqli_num_rows($retval);
+    // Handle profile image upload
+    $target_dir = "upload/";
+    $target_file = $target_dir . basename($_FILES["profile_image"]["name"]);
+    $uploadOk = 1;
+    $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
-    if($count>=1){
-        header("location:login.php?signup=0");
-    }else {
-        $sql="INSERT INTO `user`(`email`, `fname`, `lname`, `password`, `isadmin`, `posts`) VALUES ('$email','$fname','$lname','$password',0,0)";
-         //  $sql = "INSERT INTO `user`(`email`, `fname`, `lname`,`isadmin`) VALUES ('$email','$fname','$lname','$password',0)";
-        mysqli_query($conn, $sql);
-        mysqli_commit($conn);
-      session_start();
-      $_SESSION['login_user']=$email;
-      header("location:index.php");
+    // Check if image file is a actual image or fake image
+    $check = getimagesize($_FILES["profile_image"]["tmp_name"]);
+    if ($check !== false) {
+        $uploadOk = 1;
+    } else {
+        echo "File is not an image.";
+        $uploadOk = 0;
     }
-}else{
-    header("location:login.php");
-}
 
+    // Check file size
+    if ($_FILES["profile_image"]["size"] > 500000) {
+        echo "Sorry, your file is too large.";
+        $uploadOk = 0;
+    }
+
+    // Allow certain file formats
+    if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+        && $imageFileType != "gif") {
+        echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+        $uploadOk = 0;
+    }
+
+    // Check if $uploadOk is set to 0 by an error
+    if ($uploadOk == 0) {
+        echo "Sorry, your file was not uploaded.";
+    // if everything is ok, try to upload file
+    } else {
+        if (move_uploaded_file($_FILES["profile_image"]["tmp_name"], $target_file)) {
+            echo "The file " . htmlspecialchars(basename($_FILES["profile_image"]["name"])) . " has been uploaded.";
+            // Insert user data into the database
+            $sql = "INSERT INTO user (email, fname, lname, password, profile_image) VALUES ('$email', '$fname', '$lname', '$password', '$target_file')";
+            mysqli_query($conn, $sql);
+
+            // Redirect to login page with success status
+            header("location: login.php?signup=success");
+            exit(); // Ensure that script execution stops after redirection
+        } else {
+            echo "Sorry, there was an error uploading your file.";
+        }
+    }
+}
 ?>

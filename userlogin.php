@@ -1,11 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: nishan
- * Date: 03-10-2017
- * Time: 09:01 PM
- *
- */
+
 session_start();
 require("config.php");
 require ("functions.php");
