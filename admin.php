@@ -22,6 +22,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Area</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <style>
         body {
@@ -87,17 +88,24 @@
 </head>
 <body>
 
-<nav>
-    <div class="nav-wrapper blue-grey darken-3">
-        <a href="#" class="brand-logo">Admin Area</a>
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><a class="btn btn-action" href="catageory.php">Category</a></li>
-            <li><a class="btn btn-action" href="index.php">Home</a></li>
-            <li><a class="btn btn-action" href="logut.php">Logout</a></li>
+
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Admin Area</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+        
+            <li class="nav-item"><a class="nav-link" href="catageory.php">Category</a></li>
+            <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="logut.php">Logout</a></li>
+            
         </ul>
     </div>
 </nav>
-
 <div class="container">
 <div class="row">
         <div class="col s12 m12 l3">

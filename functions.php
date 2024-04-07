@@ -28,7 +28,8 @@ function upload_image($iname, $type)
 
     //chose post type
     if ($type == "lost") {
-        $target_dir = "upload/lostimages/";
+         $target_dir = "upload/lostimages/";
+        
 
     }
 
@@ -528,5 +529,3 @@ function draft_post_count(){
 }
 
 ?>
-
-

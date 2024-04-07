@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: nishan
- * Date: 22-11-2017
- * Time: 05:49 PM
- */
+
 require("config.php");
 require("session.php");
 require("functions.php");
@@ -29,108 +24,132 @@ if (isset($_GET['id'])) {
     $pincode = $row['pincode'];
     $disc = $row['discription'];
     $imgurl = get_imgurl($row['imgid'], $type);
+
 } else {
     //header('location:index.php');
 }
 
-?>
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/html">
+?><!DOCTYPE html>
+<html lang="en">
+
 <head>
-
-    <!--Import Google Icon Font-->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!--Import materialize.css-->
-    <link type="text/css" rel="stylesheet" href="css/materialize.css" media="screen,projection"/>
-    <!--Let browser know website is optimized for mobile-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="stylesheet" href="css/main.css">
-
-    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
-    <script type="text/javascript" src="js/materialize.min.js"></script>
-    <script type="text/javascript" src="js/mainx.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lost And Found</title>
+  
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
-        .postcard {
-            margin-left: 20px;
-            margin-right: 20px;
-            border-radius: 20px;
-
+        /* Custom styles */
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+            color: #333;
         }
 
 
+        .navbar-brand {
+            font-size: 1.5rem;
+            color: #fff;
+        }
+
+        .post-container {
+            margin-top: 20px;
+        }
+
+        .post-image {
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .post-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .post-details {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        .post-details h5 {
+            margin-top: 0;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .post-details p {
+            margin: 10px 0;
+            line-height: 1.6;
+        }
+
+        .btn-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .btn-container .btn {
+            margin-right: 10px;
+        }
     </style>
 </head>
-<body class="   blue-grey  darken-4">
-<ul id="dropdown1" class="dropdown-content  maindrop white">
 
-
-    <li><a href="#posts" class=" white-text indigo darken-3">Posts</a></li>
-
-    <li class="divider"></li>
-
-    <li><a href="logut.php" class="blue darken-1 white-text indigo darken-4">Logout</a></li>
-</ul>
-<nav class="  blue-grey darken-3 z-depth-2" >
-    <div class="nav-wrapper  ">
-
-        <a href="index.php" class="brand-logo " style="margin-left: 20px;text-transform: uppercase;">Lost And Found</a>
-        <ul class="right hide-on-med-and-down">
-
-            <!--<li><a href="about.php">About</a></li>-->
-            <?php if (is_admin()) {
-                echo " <li><a href=\"admin.php\" class=\" white-text btn \">ADMIN PANEL</a></li>";
-            } ?>
-            <li><a href="profile.php" class=" btn  white-text ">PROFILE</a></li>
-            <li><a href="logut.php" class="btn  white-text ">LOGOUT</a></li>
-
-        </ul>
-
-    </div>
-</nav>
-<br>
-<br>
-<div class="container">
-    <div class="row">
-        <div class="col l6 s12">
-
-            <?php
-            echo "<img class=\"materialboxed\" width=\"300\" height=\"300px\"
-                 src=\"$imgurl\">";
-            ?>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a href="#" class="navbar-brand">Lost And Found</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <?php if (is_admin()) : ?>
+                    <li class="nav-item"><a href="admin.php" class="nav-link">ADMIN PANEL</a></li>
+                    <?php endif; ?>
+                    <li class="nav-item"><a href="profile.php" class="nav-link">PROFILE</a></li>
+                    <li class="nav-item"><a href="logout.php" class="nav-link">LOGOUT</a></li>
+                </ul>
+            </div>
         </div>
+    </nav>
 
-        <div class="col l6 s12 blue darken-3" style="border-radius: 30px;">
-            <div class="container">
-                <div class="row">
-                    <br>
-                    <?php
-                    echo " <div class=\"col s12 white-text \" style=\"text-transform: capitalize;font-weight: 800;\">Post by $user</div>
-                    <div class=\"col s12 white-text\" style=\"font-weight: 100;\">$email</div>
-                    <div class=\"col s12 white-text\" style=\"font-weight: 430;margin-top: 10px;\">$cat</div>
-                    <div class=\"col s12 white-text\" style=\"font-weight: 300;\">$phone</div>
-                    <div class=\"col s12 white-text\" style=\"font-weight: 300;\">$pdate</div>
-                    <div class=\"col s12 white-text\" style=\"font-weight: 300;\">$add - $pincode </div>
-                    <div class=\"col s12 white-text \" style=\"text-transform: ;font-weight:500;margin-top: 5px;\">$disc</div>
-                     <div class='col s12'><a class=\"waves-effect waves-light btn teal\" style=\"margin-top: 10px\" href=\"mailto:$email\" subject=\"a notification from flownthings \" target=\"_top\">Contact</a></div>
-                     ";
-                    if (is_admin()) {
-                        echo "<div class='col s12'><a class=\"waves-effect waves-light btn red lighten-1\" style=\"margin-top: 10px\" href=\"deletepost.php?id=$id&&type=$type\" >delete</a></div>
-                     ";
-                       }
-
-                    ?>
-
+    <div class="container post-container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="post-image">
+                    <?php echo "<img class=\"materialboxed\" src=\"$imgurl\">"; ?>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="post-details">
+                    <h5>Post Details</h5>
+                    <p><strong>Posted by:</strong> <?php echo $user; ?></p>
+                    <p><strong>Email:</strong> <?php echo $email; ?></p>
+                    <p><strong>Category:</strong> <?php echo $cat; ?></p>
+                    <p><strong>Phone:</strong> <?php echo $phone; ?></p>
+                    <p><strong>Date:</strong> <?php echo $pdate; ?></p>
+                    <p><strong>Address:</strong> <?php echo "$add - $pincode"; ?></p>
+                    <p><strong>Description:</strong> <?php echo $disc; ?></p>
+                    <div class="btn-container">
+                        <a href="mailto:<?php echo $email; ?>" class="btn btn-primary">Contact</a>
+                        <?php if (is_admin()) : ?>
+                        <a href="deletepost.php?id=<?php echo $id; ?>&type=<?php echo $type; ?>"
+                            class="btn btn-danger">Delete</a>
+                        <?php endif; ?>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-</div>
-
-<br>
-<br>
-
-
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
 </html>
+
+

@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: nishan
- * Date: 18-11-2017
- * Time: 02:31 PM
- */
+
 require("config.php");
 require("session.php");
 require("functions.php");
@@ -36,5 +31,3 @@ else {
 }
 //header('location:index.php');
 ?>
-
-
