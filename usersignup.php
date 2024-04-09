@@ -8,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = md5(mysqli_real_escape_string($conn, $_POST['password']));
 
     // Handle profile image upload
-    $target_dir = "upload/";
+    $target_dir = "upload/profile_images";
     $target_file = $target_dir . basename($_FILES["profile_image"]["name"]);
     $uploadOk = 1;
     $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));

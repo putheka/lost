@@ -129,12 +129,24 @@ if (isset($_GET['signup'])) {
                                 <input id="password" type="password" name="password" class="form-control" required>
                             </div>
                             <div class="form-group">
+                                <p> Profile Image</p>
                                 <label for="file-input" class="preview-container">
+                
                                     <img id="preview-image" src="https://img.freepik.com/free-photo/white-cloud-with-download-icon-cloud-computing-technology-sign-symbol-3d-rendering_56104-1285.jpg?w=1380&t=st=1711097775~exp=1711098375~hmac=eb16db4733390ac5399d61cd49c9d4b0fb63b833b1e0d6ef68744793f4f1df0e" alt="User Preview">
-                                    <span>Choose Profile Image</span>
+                                   
                                     <input type="file" id="file-input" name="profile_image" accept="image/*" required onchange="previewImage(event)">
                                 </label>
                             </div>
+
+                            <!-- <div class="form-group">
+                                <p> Profile Image</p>
+                                <label for="file-input" class="preview-container">
+                
+                                    <img id="preview-image" src="https://t4.ftcdn.net/jpg/06/72/14/49/240_F_672144973_a4ZclBijuBlyWaqQDfXo7hFgK6U4fXJU.jpg" alt="User Preview">
+                                   
+                                    <input type="file" id="file-input" name="profile_image" accept="image/*" required onchange="previewImage(event)">
+                                </label>
+                            </div> -->
                             <div class="form-group text-center mb-5">
                                 <button class="btn btn-dark" type="submit">Sign Up</button>
                             </div>
