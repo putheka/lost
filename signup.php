@@ -65,6 +65,12 @@ if (isset($_GET['signup'])) {
             object-fit: cover;
             border-radius: 10px;
         }
+        #id-preview-image{
+            max-width: 100%;
+            max-height: 300px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
 
         .preview-container {
             position: relative;
@@ -131,22 +137,21 @@ if (isset($_GET['signup'])) {
                             <div class="form-group">
                                 <p> Profile Image</p>
                                 <label for="file-input" class="preview-container">
-                
+
                                     <img id="preview-image" src="https://img.freepik.com/free-photo/white-cloud-with-download-icon-cloud-computing-technology-sign-symbol-3d-rendering_56104-1285.jpg?w=1380&t=st=1711097775~exp=1711098375~hmac=eb16db4733390ac5399d61cd49c9d4b0fb63b833b1e0d6ef68744793f4f1df0e" alt="User Preview">
-                                   
+
                                     <input type="file" id="file-input" name="profile_image" accept="image/*" required onchange="previewImage(event)">
                                 </label>
                             </div>
 
-                            <!-- <div class="form-group">
-                                <p> Profile Image</p>
-                                <label for="file-input" class="preview-container">
-                
-                                    <img id="preview-image" src="https://t4.ftcdn.net/jpg/06/72/14/49/240_F_672144973_a4ZclBijuBlyWaqQDfXo7hFgK6U4fXJU.jpg" alt="User Preview">
-                                   
-                                    <input type="file" id="file-input" name="profile_image" accept="image/*" required onchange="previewImage(event)">
+                            <div class="form-group">
+                                <p>ID Image</p>
+                                <label for="id-file-input" class="preview-container">
+                                    <img id="id-preview-image" src="./image/ID1.png" alt="ID Preview">
+                                    <input type="file" id="id-file-input" name="id_image" accept="image/*" required onchange="previewIDImage(event)">
                                 </label>
-                            </div> -->
+                            </div>
+
                             <div class="form-group text-center mb-5">
                                 <button class="btn btn-dark" type="submit">Sign Up</button>
                             </div>
@@ -161,7 +166,7 @@ if (isset($_GET['signup'])) {
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script>
+    <script>
         function previewImage(event) {
             const fileInput = event.target;
             const previewImage = document.getElementById('preview-image');
@@ -178,6 +183,20 @@ if (isset($_GET['signup'])) {
 
         function toggleForm() {
             window.location.href = "login.php";
+        }
+
+        function previewIDImage(event) {
+            const idFileInput = event.target;
+            const idPreviewImage = document.getElementById('id-preview-image');
+
+            const file = idFileInput.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function(e) {
+                idPreviewImage.src = e.target.result;
+            };
+
+            reader.readAsDataURL(file);
         }
     </script>
 

@@ -36,7 +36,7 @@ if (isset($_GET['id'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lost And Found</title>
-  
+    <link type="text/css" rel="stylesheet" href="css/materialize.css" media="screen,projection"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         /* Custom styles */
@@ -120,7 +120,7 @@ if (isset($_GET['id'])) {
         <div class="row">
             <div class="col-md-6">
                 <div class="post-image">
-                    <?php echo "<img class=\"materialboxed\" src=\"$imgurl\">"; ?>
+                    <?php echo "<img class=\"materialboxed\"width=\"300\" height=\"300px\"src=\"$imgurl\">"; ?>
                 </div>
             </div>
             <div class="col-md-6">

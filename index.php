@@ -41,6 +41,7 @@ $user = $_SESSION['login_user'];
             <li class='nav-item'><a class="nav-link" href="found.php">Found Post</a></li>
             <li class='nav-item'><a class="nav-link" href="profile.php">PROFILE</a></li>
             <li class='nav-item'><a class="nav-link" href="logut.php">LOGOUT</a></li>
+           
         </ul
     </div>
     </div>
