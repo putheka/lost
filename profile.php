@@ -20,26 +20,34 @@ $post = $row['posts'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Profile</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link rel="stylesheet" href="css/profile.css"> <!-- Your custom CSS file -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"> -->
+
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        ul li {
+            margin-right: 15px;
+        }
+    </style>
 </head>
 
 <body>
 
+
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Lost And Found</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
-                <?php if (is_admin()) {
-                    echo "<li class=\"nav-item\"><a class=\"nav-link\" href=\"admin.php\">ADMIN PANEL</a></li>";
-                } ?>
-                <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="logut.php">LOGOUT</a></li>
-            </ul>
+        <div class="container">
+            <a class="navbar-brand" href="#">Admin Area</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+
+                    <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="logout.php">Logout</a></li>
+
+
+                </ul>
+            </div>
         </div>
     </nav>
 
@@ -80,7 +88,7 @@ $post = $row['posts'];
             </div>
 
             <!-- Posts Table Column -->
-            <div class="col-md-12">
+            <div class="col-md-12 mt-5">
                 <div class="card">
                     <div class="card-header">
                         Posts

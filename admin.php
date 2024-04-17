@@ -22,8 +22,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Area</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    
     <style>
         body {
             background-color: #f5f5f5;
@@ -82,6 +83,9 @@
             background-color: #eeeeee;
             text-transform: uppercase;
             font-weight: bold;
+        }
+        tbody tr:hover {
+            background-color: #f2f2f2;
         }
        
     </style>
@@ -153,9 +157,9 @@
 
     <div class="row">
         <div class="col s12">
-            <div class="card-panel blue-grey darken-2 white-text">
+        <div class="white-text blue-grey darken-1 xx z-depth-1 card-panel" style="border-radius: 5px;">
                 
-                <table>
+        <table class="centered responsive-table">
                     <thead>
                         <tr>
                             <th>User Name</th>

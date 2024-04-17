@@ -8,10 +8,7 @@
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Custom CSS -->
-    <style>
-        /* Add your custom CSS styles here */
-    </style>
+    
 </head>
 <body class="grey darken-1">
 <?php
