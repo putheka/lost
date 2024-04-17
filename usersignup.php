@@ -82,8 +82,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $sql = "INSERT INTO user (email, fname, lname, password, profile_image, id_image, is_active) VALUES ('$email', '$fname', '$lname', '$password', '$target_file', '$id_target_file', 0)";
                     mysqli_query($conn, $sql);
 
-                    // Redirect to login page with success status
-                    header("location: login.php?signup=success");
+                    // Redirect to pending page with success status
+                    header("location: pending_approval.php?signup=success");
                     exit(); // Ensure that script execution stops after redirection
                 } else {
                     echo "Sorry, there was an error uploading your ID file.";
@@ -102,7 +102,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up - Admin Approval</title>
-    <!-- Include any necessary CSS stylesheets -->
+   
 </head>
 <body>
     <h1>Admin Approval Required</h1>
