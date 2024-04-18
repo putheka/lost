@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: nishan
- * Date: 22-11-2017
- * Time: 08:33 PM
- */
+
 require ('config.php');
 
 global $conn;

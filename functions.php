@@ -1,3 +1,4 @@
+
 <?php
 
 //function to upload image and returns the reference id
@@ -364,7 +365,7 @@ function get_user_list()
         echo "<tr><td>$user</td>
                 <td>$email</td>
                 <td>$post</td>
-                <td><a href='deleteuser.php?id=$email' class='btn'>delete</a></td>
+                <td><a href='deleteuser.php?id=$email' class='btn text-white'>Delete</a></td>
                 </tr>";
 
     }
@@ -372,7 +373,7 @@ function get_user_list()
 
 }
 
-//function to get post list-admin-panel
+//function to get post list-admin-panel 
 function get_post_list($type)
 {
     global $conn;
@@ -404,12 +405,87 @@ function get_post_list($type)
                 <td>$user</td>
                 <td>$cat</td>
                  <td>$pdate</td>
-                <td><a href='knowmore.php?id=$id&&type=$type' class='btn'>details</a></td>
+                <td><a href='knowmore.php?id=$id&&type=$type' class='btn text-white'>details</a></td>
                 </tr>";
 
 
     }
 }
+
+// Function to get post list for lost items as Bootstrap cards
+function get_lost_item_cards() {
+    global $conn;
+    $output = '';
+
+    $sql = "SELECT `id`, `discription`,`cat_ref`, `adressid`, `pincode`, `uemail`, `imgid`, `postdate` ,`draft` FROM `lthings` WHERE `draft` = 0";
+    $retval = mysqli_query($conn, $sql);
+
+    while ($row = mysqli_fetch_array($retval, MYSQLI_ASSOC)) {
+        $cat = get_catname($row['cat_ref']);
+        $id = $row['id'];
+        $user = get_user($row['uemail']);
+        $pdate = $row['postdate'];
+
+        // Get image URL
+        $imgurl = get_imgurl($row['imgid'], 'lost');
+
+        // Construct Bootstrap card
+        $output .= "<div class='col-md-4 mb-4'>
+                        <div class='card'>
+                            <img src='$imgurl' class='card-img-top' alt='Lost Item Image'>
+                            <div class='card-body'>
+                                <h5 class='card-title'>$cat</h5>
+                                <p class='card-text'>$pdate</p>
+                                <a href='knowmore.php?id=$id&type=lost' class='btn btn-primary'>View Details</a>
+                            </div>
+                        </div>
+                    </div>";
+    }
+
+    return $output;
+}
+// Function to get post list for found items as Bootstrap cards
+function get_found_item_cards() {
+    global $conn;
+    $output = '';
+
+    $sql = "SELECT `id`, `discription`,`cat_ref`, `adressid`, `pincode`, `uemail`, `imgid`, `postdate` ,`draft` FROM `fthings` WHERE `draft` = 0";
+    $retval = mysqli_query($conn, $sql);
+
+    while ($row = mysqli_fetch_array($retval, MYSQLI_ASSOC)) {
+        $cat = get_catname($row['cat_ref']);
+        $id = $row['id'];
+        $user = get_user($row['uemail']);
+        $pdate = $row['postdate'];
+
+        // Get image URL
+        $imgurl = get_imgurl($row['imgid'], 'found');
+
+        // Check if image URL is empty
+        if (empty($imgurl)) {
+            // If no image, display a default image or placeholder text
+            $imgurl = 'path_to_default_image/default_image.jpg'; // Set the path to your default image
+            // Or use placeholder text
+            // $imgurl = 'No Image Available';
+        }
+
+        // Construct Bootstrap card
+        $output .= "<div class='col-md-4 mb-4'>
+                        <div class='card'>
+                            <img src='$imgurl' class='card-img-top' alt='Found Item Image'>
+                            <div class='card-body'>
+                                <h5 class='card-title'>$cat</h5>
+                                <p class='card-text'>$pdate</p>
+                                <a href='knowmore.php?id=$id&type=found' class='btn btn-primary'>View Details</a>
+                            </div>
+                        </div>
+                    </div>";
+    }
+
+    return $output;
+}
+
+
 
 //function to get post which are drafted
 function get_draft_post()
@@ -438,7 +514,7 @@ function get_draft_post()
                 <td>$cat</td>
                  <td>$pdate</td>
                  <td>$ddate</td>
-                <td><a href='knowmore.php?id=$id&&type=lost' class='btn'>details</a></td>
+                <td><a href='knowmore.php?id=$id&&type=lost' class='btn text-white'>details</a></td>
                 </tr>";
         }
     }

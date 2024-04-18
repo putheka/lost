@@ -32,7 +32,7 @@
 
                 </ul>
                 <div class="text-center">
-                    <button type="button" class="btn btn-primary " oncPlick="toggleForm()">Go to Login Page</button>
+                    <button type="button" class="btn btn-primary " onclick="toggleForm()">Go to Login Page</button>
                 </div>
             </div>
         </div>

@@ -109,8 +109,7 @@ if (isset($_GET['signup'])) {
 </head>
 
 <body>
-
-    <div class="container">
+<div class="container">
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="card">
@@ -184,7 +183,6 @@ if (isset($_GET['signup'])) {
         function previewIDImage(event) {
             const fileInput = event.target;
             const previewIDImage = document.getElementById('id-preview-image');
-
             const file = fileInput.files[0];
             const reader = new FileReader();
 
