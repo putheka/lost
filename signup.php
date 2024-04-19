@@ -1,11 +1,15 @@
 <?php
+require ('config.php');
+require ('functions.php');
+// echo get_catname(15); 
+
 session_start();
 if (isset($_SESSION['login_user'])) {
     header("location:index.php");
 }
 
 if (isset($_GET['signup'])) {
-    $x = $_GET['signup'];
+    $x = $_GET['signup'];   
     if ($x == 0)
         echo "<p id='sign' hidden>fail</p>";
     if ($x == 1)
