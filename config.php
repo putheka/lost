@@ -1,6 +1,6 @@
 <?php
 
-$db_name='db_lostandfound';
+$db_name='database_lostandfound';
 $dbhost = 'localhost';
 $dbuser = 'root';
 $dbpass = '';

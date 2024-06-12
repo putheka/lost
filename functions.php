@@ -365,7 +365,7 @@ function get_user_list()
         echo "<tr><td>$user</td>
                 <td>$email</td>
                 <td>$post</td>
-                <td><a href='deleteuser.php?id=$email' class='btn text-white'>Delete</a></td>
+                <td><a href='deleteuser.php?id=$email' class='btn text-danger'>Delete</a></td>
                 </tr>";
 
     }
@@ -405,7 +405,7 @@ function get_post_list($type)
                 <td>$user</td>
                 <td>$cat</td>
                  <td>$pdate</td>
-                <td><a href='knowmore.php?id=$id&&type=$type' class='btn text-white'>details</a></td>
+                <td><a href='knowmore.php?id=$id&&type=$type' class='btn text-success'>Details</a></td>
                 </tr>";
 
 

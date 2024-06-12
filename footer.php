@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: nishan
- * Date: 06-11-2017
- * Time: 03:04 PM
- */
+
 echo "<footer class=\"page-footer blue darken-1\" style=\"    padding-top: 0px;\">
     <div class=\"container\" hidden>
         <div class=\"row\">

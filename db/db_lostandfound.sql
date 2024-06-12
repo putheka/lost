@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `db_lostandfound`
+-- Database: `database_lostandfound`
 --
 
 DELIMITER $$
@@ -165,6 +165,11 @@ CREATE TABLE `user` (
   `password` varchar(32) NOT NULL,
   `isadmin` tinyint(1) DEFAULT '0',
   `posts` int(3) NOT NULL DEFAULT '0'
+  `is_active` TINYINT(1) DEFAULT 0,
+  `profile_image` VARCHAR(255),
+  `id_image` VARCHAR(255);
+
+
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
