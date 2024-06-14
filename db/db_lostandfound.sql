@@ -167,7 +167,8 @@ CREATE TABLE `user` (
   `posts` int(3) NOT NULL DEFAULT '0'
   `is_active` TINYINT(1) DEFAULT 0,
   `profile_image` VARCHAR(255),
-  `id_image` VARCHAR(255);
+  `id_image` VARCHAR(255),
+  `is_active` VARCHAR(255);
 
 
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
