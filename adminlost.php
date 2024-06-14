@@ -124,6 +124,7 @@
         <li><a href="admin_panel.php"><i class="fas fa-users"></i> User Pending (<?php echo $tu; ?>)</a></li>
         <li><a href="Profile.php"><i class="fas fa-user"></i> Profile</a></li>
         <li><a href="catageory.php"><i class="fas fa-list"></i> Category</a></li>
+        <li><a href="admin.php"><i class="fas fa-user"></i> Total Users (<?php echo $tu; ?>)</a></li>
         <li><a href="adminlost.php"class="text-primary disabled"><i class="fas fa-th-list"></i> Lost Posts (<?php echo $tl; ?>)</a></li>
         <li><a href="adminfound.php"><i class="fas fa-check"></i> Found Posts (<?php echo $tf; ?>)</a></li>
         <li><a href="admindraft.php"><i class="fas fa-file-alt"></i> Drafted Posts (<?php echo $td; ?>)</a></li>

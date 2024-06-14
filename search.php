@@ -40,10 +40,11 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <?php if (is_admin()) {
-                    echo "<li class='nav-item'><a href=\"admin.php\" class=\"nav-link text-white\">ADMIN PANEL</a></li>";
+                    echo "<li class='nav-item'><a href=\"admin.php\" class=\"nav-link text-white\">Admin Panel</a></li>";
                 } ?>
-                <li class='nav-item'><a href="profile.php" class="nav-link text-white">PROFILE</a></li>
-                <li class='nav-item'><a href="logout.php" class="nav-link text-white">LOGOUT</a></li>
+                <li class='nav-item'><a href="index.php" class="nav-link text-white">Home</a></li>
+                <li class='nav-item'><a href="profile.php" class="nav-link text-white">Profile</a></li>
+                <li class='nav-item'><a href="logout.php" class="nav-link text-white">Logout</a></li>
             </ul>
         </div>
     </div>

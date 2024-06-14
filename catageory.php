@@ -4,6 +4,17 @@ require("config.php");
 require("functions.php");
 auth_admin();
 
+mysqli_query($conn, "SET @p0='0'");
+mysqli_query($conn, "CALL `userCount`(@p0)");
+$proce = mysqli_fetch_array(mysqli_query($conn, "SELECT @p0 AS `counts`"));
+$tu = $proce['counts'];
+
+//$tu=t_count('user');
+$tl = tp_count('lthings');
+$tf = tp_count('fthings');
+$td = draft_post_count();
+
+
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     global $conn;
     if (isset($_POST['catref'])) {
@@ -38,7 +49,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Area (Flown Things)</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,700,900|Roboto+Condensed:400,300,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,700,900|Roboto+Condensed:400,300,700" 
+    rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="css/postreport.css">
     <style>
         body {
@@ -73,29 +86,122 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         .btn-large {
             font-weight: 700;
         }
+
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        .sidebar {
+            background-color: #343a40;
+            color: #ffffff;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 250px;
+            padding-top: 20px;
+            transition: width 0.3s;
+            overflow-y: auto; /* Allow vertical scrolling */
+            z-index: 999; /* Ensure sidebar is above content */
+        }
+
+        .sidebar-header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 10px;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar-menu li {
+            border-bottom: 1px solid #454d55;
+        }
+
+        .sidebar-menu li:last-child {
+            border-bottom: none;
+        }
+
+        .sidebar-menu li a {
+            display: block;
+            padding: 15px 20px;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 18px;
+            transition: background-color 0.3s;
+        }
+
+        .sidebar-menu li a:hover {
+            background-color: #454d55;
+        }
+
+        .content {
+            padding: 20px;
+            margin-left: 250px;
+            transition: margin-left 0.3s;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px; /* Added margin-top to separate content from header */
+        }
+
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: none;
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                margin-left: 0;
+            }
+
+            .sidebar {
+                width: 0;
+            }
+
+            .sidebar.collapsed {
+                width: 80px;
+            }
+
+            .sidebar.collapsed .sidebar-menu li a {
+                padding: 15px;
+                text-align: center;
+            }
+
+            .sidebar.collapsed .sidebar-header {
+                display: none;
+            }
+        }
+
     </style>
 </head>
 <body>
-
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-<div class="container">
-    <a class="navbar-brand" href="#">Admin Area</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ml-auto">
-        
-            <li class="nav-item"><a class="nav-link" href="admin.php">Admin Panel</a></li>
-            <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
-            <li class="nav-item"><a class="nav-link" href="logout.php">Logout</a></li>
-            
-            
-        </ul>
+<div class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+        <h3>Admin Area</h3>
     </div>
-    </div>
-</nav>
+    <ul class="sidebar-menu">
+        <li><a href="admin_panel.php"><i class="fas fa-users"></i> User Pending (<?php echo $tu; ?>)</a></li>
+        <li><a href="Profile.php"><i class="fas fa-user"></i> Profile</a></li>
+        <li><a href="catageory.php" class="text-primary disabled"><i class="fas fa-list"></i> Category</a></li>
+        <li><a href="admin.php"><i class="fas fa-user"></i> Total Users (<?php echo $tu; ?>)</a></li>
+        <li><a href="adminlost.php"><i class="fas fa-th-list"></i> Lost Posts (<?php echo $tl; ?>)</a></li>
+        <li><a href="adminfound.php"><i class="fas fa-check"></i> Found Posts (<?php echo $tf; ?>)</a></li>
+        <li><a href="admindraft.php"><i class="fas fa-file-alt"></i> Drafted Posts (<?php echo $td; ?>)</a></li>
+        <li><a href="index.php"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+    </ul>
+</div>
 <div class="container mt-5">
     <div class="row">
         <div class="col-md-6">

@@ -120,6 +120,7 @@
     </style>
 </head>
 <body>
+    
 <div class="sidebar" id="sidebar">
     <div class="sidebar-header">
         <h3>Admin Area</h3>

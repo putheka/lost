@@ -25,7 +25,7 @@
 
     <li class="divider"></li>
 
-    <li><a href="logut.php">Logout</a></li>
+    <li><a href="logout.php">Logout</a></li>
 </ul>
 <nav class="blue darken-2">
     <div class="nav-wrapper  ">

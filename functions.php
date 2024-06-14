@@ -604,4 +604,19 @@ function draft_post_count(){
     return $total;
 }
 
+
+function pending_account_count() {
+    global $conn;
+
+    $sql = "SELECT COUNT(*) AS pending_count FROM user WHERE is_active = 0";
+    $result = mysqli_query($conn, $sql);
+
+    if ($result) {
+        $row = mysqli_fetch_assoc($result);
+        return $row['pending_count'];
+    } else {
+        return 0; // Return 0 if the query fails
+    }
+}
+
 ?>

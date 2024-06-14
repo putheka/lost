@@ -32,7 +32,7 @@ require("session.php");
 
     <li class="divider"></li>
 
-    <li><a href="logut.php" class="blue darken-1 white-text indigo darken-4">Logout</a></li>
+    <li><a href="logout.php" class="blue darken-1 white-text indigo darken-4">Logout</a></li>
 </ul>
 
 

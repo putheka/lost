@@ -27,11 +27,13 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     <?php if (is_admin()) {
-                        echo "<li class=\"nav-item\"><a class=\"nav-link\" href=\"admin.php\">ADMIN PANEL</a></li>";
+                        echo "<li class=\"nav-item\"><a class=\"nav-link\" href=\"admin.php\">Admin Panel</a></li>";
                     } ?>
-                    <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="profile.php">PROFILE</a></li>
-                    <li class="nav-item"><a class="nav-link" href="logut.php">LOGOUT</a></li>
+                    <li class='nav-item'><a class="nav-link" href="index.php">Home</a></li>
+                    <li class='nav-item'><a class="nav-link" href="lost.php">Lost Post</a></li>
+                    <li class='nav-item'><a class="nav-link" href="found.php">Found Post</a></li>
+                    <li class='nav-item'><a class="nav-link" href="profile.php">Profile</a></li>
+                    <li class='nav-item'><a class="nav-link" href="logout.php">Logout</a></li>
                 </ul>
             </div>
         </div>
