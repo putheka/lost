@@ -413,13 +413,91 @@ function get_post_list($type)
 }
 
 // Function to get post list for lost items as Bootstrap cards
-function get_lost_item_cards() {
+// function get_lost_item_cards() {
+//     global $conn;
+//     $output = '';
+
+//     $sql = "SELECT `id`, `discription`,`cat_ref`, `adressid`, `pincode`, `uemail`, `imgid`, `postdate` ,`draft` FROM `lthings` WHERE `draft` = 0";
+//     $retval = mysqli_query($conn, $sql);
+
+//     while ($row = mysqli_fetch_array($retval, MYSQLI_ASSOC)) {
+//         $cat = get_catname($row['cat_ref']);
+//         $id = $row['id'];
+//         $user = get_user($row['uemail']);
+//         $pdate = $row['postdate'];
+
+//         // Get image URL
+//         $imgurl = get_imgurl($row['imgid'], 'lost');
+
+//         // Construct Bootstrap card
+//         $output .= "<div class='col-md-4 mb-4'>
+//                         <div class='card'>
+//                             <img src='$imgurl' class='card-img-top' alt='Lost Item Image'>
+//                             <div class='card-body'>
+//                                 <h5 class='card-title'>$cat</h5>
+//                                 <p class='card-text'>$pdate</p>
+//                                 <a href='knowmore.php?id=$id&type=lost' class='btn btn-primary'>View Details</a>
+//                             </div>
+//                         </div>
+//                     </div>";
+//     }
+
+//     return $output;
+// }
+
+//     $retval = mysqli_query($conn, $sql);
+
+//     // Fetch and display results
+//     while ($row = mysqli_fetch_array($retval, MYSQLI_ASSOC)) {
+//         $cat = get_catname($row['cat_ref']);
+//         $id = $row['id'];
+//         $user = get_user($row['uemail']);
+//         $pdate = $row['postdate'];
+
+//         // Get image URL
+//         $imgurl = get_imgurl($row['imgid'], 'lost');
+
+//         // Construct Bootstrap card
+//         $output .= "<div class='col-md-4 mb-4'>
+//                         <div class='card'>
+//                             <img src='$imgurl' class='card-img-top' alt='Lost Item Image'>
+//                             <div class='card-body'>
+//                                 <h5 class='card-title'>$cat</h5>
+//                                 <p class='card-text'>$pdate</p>
+//                                 <a href='knowmore.php?id=$id&type=lost' class='btn btn-primary'>View Details</a>
+//                             </div>
+//                         </div>
+//                     </div>";
+//     }
+
+//     return $output;
+// }
+function get_lost_item_cards($keyword = '', $category = '', $date = '', $location = '') {
     global $conn;
     $output = '';
 
-    $sql = "SELECT `id`, `discription`,`cat_ref`, `adressid`, `pincode`, `uemail`, `imgid`, `postdate` ,`draft` FROM `lthings` WHERE `draft` = 0";
+    // Base SQL query
+    $sql = "SELECT `id`, `discription`, `cat_ref`, `adressid`, `pincode`, `uemail`, `imgid`, `postdate`, `draft` 
+            FROM `lthings` 
+            WHERE `draft` = 0";
+
+    // Add search filters
+    if ($keyword) {
+        $sql .= " AND (`discription` LIKE '%" . mysqli_real_escape_string($conn, $keyword) . "%')";
+    }
+    if ($category) {
+        $sql .= " AND `cat_ref` = '" . mysqli_real_escape_string($conn, $category) . "'";
+    }
+    if ($date) {
+        $sql .= " AND DATE(`postdate`) = '" . mysqli_real_escape_string($conn, $date) . "'";
+    }
+    if ($location) {
+        $sql .= " AND `adressid` LIKE '%" . mysqli_real_escape_string($conn, $location) . "%'";
+    }
+
     $retval = mysqli_query($conn, $sql);
 
+    // Fetch and display results
     while ($row = mysqli_fetch_array($retval, MYSQLI_ASSOC)) {
         $cat = get_catname($row['cat_ref']);
         $id = $row['id'];
@@ -444,14 +522,76 @@ function get_lost_item_cards() {
 
     return $output;
 }
+
+
+
+
 // Function to get post list for found items as Bootstrap cards
-function get_found_item_cards() {
+// function get_found_item_cards() {
+//     global $conn;
+//     $output = '';
+
+//     $sql = "SELECT `id`, `discription`,`cat_ref`, `adressid`, `pincode`, `uemail`, `imgid`, `postdate` ,`draft` FROM `fthings` WHERE `draft` = 0";
+//     $retval = mysqli_query($conn, $sql);
+
+//     while ($row = mysqli_fetch_array($retval, MYSQLI_ASSOC)) {
+//         $cat = get_catname($row['cat_ref']);
+//         $id = $row['id'];
+//         $user = get_user($row['uemail']);
+//         $pdate = $row['postdate'];
+
+//         // Get image URL
+//         $imgurl = get_imgurl($row['imgid'], 'found');
+
+//         // Check if image URL is empty
+//         if (empty($imgurl)) {
+//             // If no image, display a default image or placeholder text
+//             $imgurl = 'path_to_default_image/default_image.jpg'; // Set the path to your default image
+//             // Or use placeholder text
+//             // $imgurl = 'No Image Available';
+//         }
+
+//         // Construct Bootstrap card
+//         $output .= "<div class='col-md-4 mb-4'>
+//                         <div class='card'>
+//                             <img src='$imgurl' class='card-img-top' alt='Found Item Image'>
+//                             <div class='card-body'>
+//                                 <h5 class='card-title'>$cat</h5>
+//                                 <p class='card-text'>$pdate</p>
+//                                 <a href='knowmore.php?id=$id&type=found' class='btn btn-primary'>View Details</a>
+//                             </div>
+//                         </div>
+//                     </div>";
+//     }
+
+//     return $output;
+// }
+function get_found_item_cards($keyword = '', $category = '', $date = '', $location = '') {
     global $conn;
     $output = '';
 
-    $sql = "SELECT `id`, `discription`,`cat_ref`, `adressid`, `pincode`, `uemail`, `imgid`, `postdate` ,`draft` FROM `fthings` WHERE `draft` = 0";
+    // Base SQL query
+    $sql = "SELECT `id`, `discription`, `cat_ref`, `adressid`, `pincode`, `uemail`, `imgid`, `postdate`, `draft` 
+            FROM `fthings` 
+            WHERE `draft` = 0";
+
+    // Add search filters
+    if ($keyword) {
+        $sql .= " AND (`discription` LIKE '%" . mysqli_real_escape_string($conn, $keyword) . "%')";
+    }
+    if ($category) {
+        $sql .= " AND `cat_ref` = '" . mysqli_real_escape_string($conn, $category) . "'";
+    }
+    if ($date) {
+        $sql .= " AND DATE(`postdate`) = '" . mysqli_real_escape_string($conn, $date) . "'";
+    }
+    if ($location) {
+        $sql .= " AND `adressid` LIKE '%" . mysqli_real_escape_string($conn, $location) . "%'";
+    }
+
     $retval = mysqli_query($conn, $sql);
 
+    // Fetch and display results
     while ($row = mysqli_fetch_array($retval, MYSQLI_ASSOC)) {
         $cat = get_catname($row['cat_ref']);
         $id = $row['id'];
@@ -460,14 +600,6 @@ function get_found_item_cards() {
 
         // Get image URL
         $imgurl = get_imgurl($row['imgid'], 'found');
-
-        // Check if image URL is empty
-        if (empty($imgurl)) {
-            // If no image, display a default image or placeholder text
-            $imgurl = 'path_to_default_image/default_image.jpg'; // Set the path to your default image
-            // Or use placeholder text
-            // $imgurl = 'No Image Available';
-        }
 
         // Construct Bootstrap card
         $output .= "<div class='col-md-4 mb-4'>
